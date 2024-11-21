@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drag-Drop</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div id="left">
+                <div class="list" draggable="true"><img src="drag_drop_icon.png" alt="">List Item 1</div>
+                <div class="list" draggable="true"><img src="drag_drop_icon.png" alt="">List Item 2</div>
+                <div class="list" draggable="true"><img src="drag_drop_icon.png" alt="">List Item 3</div>
+                <div class="list" draggable="true"><img src="drag_drop_icon.png" alt="">List Item 4</div>
+
+            </div>
+            <div id="right"></div>
+        </div>
+
+        <script>
+          
+          let lists = document.getElementsByClassName("list");
+          let rightBox = document.getElementById("right");
+          let leftBox = document.getElementById("left");
+
+          // fct 
+          for(list of lists){
+            list.addEventListener("dragstart",(e) =>{
+                let selected = e.target; //  est utilisé pour faire référence à l'élément qui a déclenché l'événement
+
+                rightBox.addEventListener("dragover",(e) =>{
+                    e.preventDefault();
+                });
+                rightBox.addEventListener("drop",(e)=>{
+                    rightBox.appendChild(selected);
+                    selected = null;// clear
+                });
+
+                leftBox.addEventListener("dragover",(e) =>{
+                    e.preventDefault();
+                });
+                leftBox.addEventListener("drop",(e)=>{
+                    leftBox.appendChild(selected);
+                    selected = null;// clear
+                });
+            })
+          }
+        </script>
+    </body>
+</html>
